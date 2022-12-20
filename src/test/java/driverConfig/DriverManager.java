@@ -35,7 +35,7 @@ private String extensionDriver = "";
 				ChromeOptions chromeOptions = new ChromeOptions();
 				if (os.contains("linux")){
 					System.out.println("entre a linux");
-					System.out.println(System.getProperty("user.name")+"/src/test/java/driver/chromedriver");
+					System.out.println(System.getProperty("user.name"));
 					System.setProperty("webdriver.chrome.driver",System.getProperty("user.name")+"/driver/chromedriver");
 					chromeOptions.addArguments("--headless");
 					chromeOptions.addArguments("--ignore-certificate-errors");
