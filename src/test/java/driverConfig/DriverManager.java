@@ -42,7 +42,7 @@ private String extensionDriver = "";
 					chromeOptions.addArguments("--disable-dev-shm-usage");
 					chromeOptions.addArguments("--ignore-certificate-errors");
 					chromeOptions.addArguments("--disable-extensions");
-
+					chromeOptions.addArguments("--remote-debugging-port=9222");
 					chromeOptions.addArguments("--disable-gpu");
 					chromeOptions.addArguments("--no-sandbox");
 					chromeOptions.addArguments("window-size=1920,1080");
