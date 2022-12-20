@@ -45,7 +45,7 @@ private String extensionDriver = "";
 					chromeOptions.addArguments("--disable-gpu");
 					chromeOptions.addArguments("--no-sandbox");
 					chromeOptions.addArguments("window-size=1920,1080");*/
-					WebDriver driver = new ChromeDriver();
+
 				}
 				else{
 					WebDriverManager.chromedriver().setup();
