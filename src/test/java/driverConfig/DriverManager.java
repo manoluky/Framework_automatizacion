@@ -36,7 +36,6 @@ private String extensionDriver = "";
 				if (os.contains("linux")){
 					System.out.println("entre a linux");
 					System.out.println(System.getProperty("user.name"));
-					//System.setProperty("webdriver.chrome.driver","/root/Framework_Automatizacion_standard/driver/chromedriver");
 
 					chromeOptions.addArguments("--headless");
 					chromeOptions.addArguments("--disable-dev-shm-usage");
@@ -49,20 +48,6 @@ private String extensionDriver = "";
 
 				}
 				WebDriverManager.chromedriver().setup();
-
-
-
-    	        /* Activar si es necesario
-    			chromeOptions.addArguments("--ignore-certificate-errors");
-    			chromeOptions.addArguments("--disable-extensions");
-    			chromeOptions.addArguments("--disable-dev-shm-usage");
-    			chromeOptions.addArguments("--disable-gpu");
-    			chromeOptions.addArguments("--no-sandbox");
-
-    			if (os.contains("linux")) {
-    			  chromeOptions.addArguments("--headless");
-    			}
-    			*/
     	        this.driver = (WebDriver)new ChromeDriver(chromeOptions);
     	        this.driver.manage().deleteAllCookies();
     	        break;
