@@ -38,8 +38,8 @@ private String extensionDriver = "";
 					System.out.println(System.getProperty("user.name"));
 					System.setProperty("webdriver.chrome.driver","/root/Framework_Automatizacion_standard/driver/chromedriver");
 
-					/*chromeOptions.addArguments("--headless");
-					chromeOptions.addArguments("--ignore-certificate-errors");
+					chromeOptions.addArguments("--headless");
+					/*chromeOptions.addArguments("--ignore-certificate-errors");
 					chromeOptions.addArguments("--disable-extensions");
 					chromeOptions.addArguments("--disable-dev-shm-usage");
 					chromeOptions.addArguments("--disable-gpu");
@@ -47,9 +47,8 @@ private String extensionDriver = "";
 					chromeOptions.addArguments("window-size=1920,1080");*/
 
 				}
-				else{
-					WebDriverManager.chromedriver().setup();
-				}
+				WebDriverManager.chromedriver().setup();
+
 
 
     	        /* Activar si es necesario
