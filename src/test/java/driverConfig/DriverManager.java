@@ -36,12 +36,13 @@ private String extensionDriver = "";
 				if (os.contains("linux")){
 					System.out.println("entre a linux");
 					System.out.println(System.getProperty("user.name"));
-					System.setProperty("webdriver.chrome.driver","/root/Framework_Automatizacion_standard/driver/chromedriver");
+					//System.setProperty("webdriver.chrome.driver","/root/Framework_Automatizacion_standard/driver/chromedriver");
 
 					chromeOptions.addArguments("--headless");
+					chromeOptions.addArguments("--disable-dev-shm-usage");
 					/*chromeOptions.addArguments("--ignore-certificate-errors");
 					chromeOptions.addArguments("--disable-extensions");
-					chromeOptions.addArguments("--disable-dev-shm-usage");
+
 					chromeOptions.addArguments("--disable-gpu");
 					chromeOptions.addArguments("--no-sandbox");
 					chromeOptions.addArguments("window-size=1920,1080");*/
