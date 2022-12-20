@@ -32,8 +32,23 @@ private String extensionDriver = "";
     	    switch (nav) {
     	       case Chrome:
     	        System.out.println("Se selecciona Chrome");
-    	        WebDriverManager.chromedriver().setup();
-    	        ChromeOptions chromeOptions = new ChromeOptions();
+				ChromeOptions chromeOptions = new ChromeOptions();
+				if (os.contains("linux")){
+					System.out.println("entre a linux");
+					System.setProperty("webdriver.chrome.driver", System.getProperty("user.name"+"/src/test/java/driver/chromedriver"));
+					chromeOptions.addArguments("--headless");
+					chromeOptions.addArguments("--ignore-certificate-errors");
+					chromeOptions.addArguments("--disable-extensions");
+					chromeOptions.addArguments("--disable-dev-shm-usage");
+					chromeOptions.addArguments("--disable-gpu");
+					chromeOptions.addArguments("--no-sandbox");
+					chromeOptions.addArguments("window-size=1920,1080");
+				}
+				else{
+					WebDriverManager.chromedriver().setup();
+				}
+
+
     	        /* Activar si es necesario
     			chromeOptions.addArguments("--ignore-certificate-errors");
     			chromeOptions.addArguments("--disable-extensions");
