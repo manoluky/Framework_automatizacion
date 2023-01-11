@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Git'){
       steps{
-        git branch: 'main', url: 'https://github.com/arpkk/FrameworkAutomatizacion.git'
+        git branch: 'master', url: 'https://oauth2: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@github.com/Israelgarate/Framework_Automatizacion_standard.git'
       } 
     }
     stage('Build') {
