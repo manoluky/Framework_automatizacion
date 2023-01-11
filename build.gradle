@@ -56,6 +56,7 @@ def tags = (findProperty('tags') == null) ? 'not @Ignore' : findProperty('tags')
 
 task runWithCucumber(type: Test) {
     dependsOn assemble, testClasses, compileTestJava
+    useJUnitPlatform()
     doLast {
         javaexec {
             main = "io.cucumber.core.cli.Main"
