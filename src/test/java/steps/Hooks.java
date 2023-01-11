@@ -24,7 +24,7 @@ public class Hooks{
 	@Before
     public void setUp(Scenario scenario)throws Throwable {
 	   this.scenario = scenario;
-       DriverContext.setUp(Navegador.Chrome, URL_GOOGLE);
+
     }
 
     

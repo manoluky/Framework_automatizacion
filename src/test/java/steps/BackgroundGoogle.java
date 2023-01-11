@@ -1,5 +1,6 @@
 package steps;
 
+import constants.Navegador;
 import driverConfig.DriverContext;
 import io.cucumber.java.en.Given;
 import pages.GooglePage;
@@ -13,7 +14,7 @@ public class BackgroundGoogle {
     GooglePage googlePage = new GooglePage();
     @Given("Ingresar a google")
     public void ingresarAGoogle() {
-        DriverContext.getDriver().navigate().to(URL_GOOGLE);
+        DriverContext.setUp(Navegador.Chrome, URL_GOOGLE);
         MetodosGenericos.esperar(2);
         String url = DriverContext.getDriver().getCurrentUrl();
         assertEquals(URL_GOOGLE, url);
