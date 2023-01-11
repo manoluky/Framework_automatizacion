@@ -17,6 +17,7 @@ pipeline {
         sh "gradle --version"
         sh "java --version"
         echo "$TESTPLAN"
+        sh " ls -la"
         sh 'gradle runWithCucumber -P tags=\\"@TEST_XRAY-13\\"'
       }
     }
