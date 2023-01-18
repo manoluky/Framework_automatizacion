@@ -61,25 +61,6 @@ task runWithCucumber() {
             main = "io.cucumber.core.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = [
-                    '--threads', '10',
-                    '--plugin', 'pretty' ,
-                    '--plugin', 'json:src/test/resources/output/report/Cucumber.json',
-                    '--plugin', 'com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:',
-                    '--glue', 'steps',
-                    'src/test/resources/features/google',
-                    '--tags', "${tags}"]
-        }
-    }
-}
-
-task runWithCucumberforDebug() {
-    dependsOn assemble, testClasses
-    doLast {
-        javaexec {
-            main = "io.cucumber.core.cli.Main"
-            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = [
-                    '--threads', '1',
                     '--plugin', 'pretty' ,
                     '--plugin', 'json:src/test/resources/output/report/Cucumber.json',
                     '--plugin', 'com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:',
@@ -89,4 +70,5 @@ task runWithCucumberforDebug() {
         }
     }
 }
+
 
