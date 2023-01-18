@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="3" time="23.719">
+    <testcase classname="Busqueda de google, se esperar realizar e ingresar a una pagina utilizando el buscador de google." name="Busqueda google" time="7.91">
+        <system-out>
+            <![CDATA[Given Ingresar a google.....................................................passed
+When introduzco la palabra "Tsoft"..........................................passed
+And selecciono el resultado de la busqueda "Tsoft"..........................passed
+Then se visualiza la pagina "https://www.tsoftglobal.com/"..................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="Busqueda de google, se esperar realizar e ingresar a una pagina utilizando el buscador de google." name="Busqueda google parametrizada" time="7.239">
+        <system-out>
+            <![CDATA[Given Ingresar a google.....................................................passed
+When introduzco la palabra "Tsoft"..........................................passed
+And selecciono el resultado de la busqueda "Tsoft"..........................passed
+Then se visualiza la pagina "https://www.tsoftglobal.com/"..................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="Busqueda de google, se esperar realizar e ingresar a una pagina utilizando el buscador de google." name="Busqueda google parametrizada 2" time="8.439">
+        <system-out>
+            <![CDATA[Given Ingresar a google.....................................................passed
+When introduzco la palabra "Jira"...........................................passed
+And selecciono el resultado de la busqueda "Jira"...........................passed
+Then se visualiza la pagina "https://www.atlassian.com/es/software/jira"....passed
+]]>
+        </system-out>
+    </testcase>
+</testsuite>
