@@ -39,12 +39,12 @@ private String extensionDriver = "";
 
 					chromeOptions.addArguments("--headless");
 					chromeOptions.addArguments("--disable-dev-shm-usage");
-					chromeOptions.addArguments("--ignore-certificate-errors");
-					chromeOptions.addArguments("--disable-extensions");
-					chromeOptions.addArguments("--remote-debugging-port=9222");
+					//chromeOptions.addArguments("--ignore-certificate-errors");
+					//chromeOptions.addArguments("--disable-extensions");
+					//chromeOptions.addArguments("--remote-debugging-port=9222");
 					chromeOptions.addArguments("--disable-gpu");
 					chromeOptions.addArguments("--no-sandbox");
-					chromeOptions.addArguments("--no-setuid-sandbox");
+					//chromeOptions.addArguments("--no-setuid-sandbox");
 
 				}
 				WebDriverManager.chromedriver().setup();
