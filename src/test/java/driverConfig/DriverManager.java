@@ -37,7 +37,7 @@ private String extensionDriver = "";
 					System.out.println("entre a linux");
 					System.out.println(System.getProperty("user.name"));
 
-					//chromeOptions.addArguments("--headless");
+					chromeOptions.addArguments("--headless");
 					//chromeOptions.addArguments("--disable-dev-shm-usage");
 					//chromeOptions.addArguments("--ignore-certificate-errors");
 					//chromeOptions.addArguments("--disable-extensions");
