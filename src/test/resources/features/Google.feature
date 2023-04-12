@@ -7,7 +7,7 @@ Feature: Busqueda de google, se esperar realizar e ingresar a una pagina utiliza
   @TEST_DB-387
   Scenario: Busqueda google
     When introduzco la palabra "Bci chile"
-    And selecciono el resultado de la busqueda "Bci chile"
+    And selecciono el resultado de la busqueda "Bci"
     Then se visualiza la pagina "https://www.bci.cl/personas"
 
   @TEST_DB-389
