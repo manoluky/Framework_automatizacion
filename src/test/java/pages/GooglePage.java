@@ -33,7 +33,7 @@ public class GooglePage {
 
     public void ingresoTextoBusqueda(String search){
         try {
-            MetodosGenericos.esperar(5);
+            MetodosGenericos.esperar(10);
             boolean validarInputText = MetodosGenericos.visualizarObjeto(inputText, 5);
             if(validarInputText){
                 inputText.sendKeys(search);
@@ -50,7 +50,7 @@ public class GooglePage {
 
 
     public void ingresoAPaginaSolicitada(String search){
-        MetodosGenericos.esperar(5);
+        MetodosGenericos.esperar(10);
         By resultadoBusqueda = By.xpath("(//h3[contains(text(),"+search+")])[1]");
         WebElement resultado = DriverContext.getDriver().findElement(resultadoBusqueda);
         resultado.click();
