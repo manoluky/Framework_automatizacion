@@ -6,9 +6,9 @@ Feature: Busqueda de google, se esperar realizar e ingresar a una pagina utiliza
 
   @TEST_DB-387
   Scenario: Busqueda google
-    When introduzco la palabra "Bci chile"
-    And selecciono el resultado de la busqueda "Bci"
-    Then se visualiza la pagina "https://www.bci.cl/personas"
+    When introduzco la palabra "Tsoft"
+    And selecciono el resultado de la busqueda "Tsoft"
+    Then se visualiza la pagina "https://www.tsoftglobal.com/"
 
   @TEST_DB-389
   Scenario Outline: Busqueda google parametrizada
