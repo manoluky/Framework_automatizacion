@@ -1,0 +1,15 @@
+{
+  "fields": {
+    "project":{
+      "id": "10000",
+      "key": "DB"
+    },
+    "summary": "Ejecución Demo Aut. BCI",
+    "issuetype": {
+      "name": "Test Execution"
+    }
+  },
+  "xrayFields": {
+    "testPlanKey": "DB-389"
+  }
+}

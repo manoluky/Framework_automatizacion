@@ -1,0 +1,28 @@
+pipeline{
+    agent any
+
+    parameters{
+        string(name:'tag', description: 'tag para ejecución de escenario o plan de pruebas')
+    }
+    tools{
+        gradle 'gradle-7.6'
+    }
+
+    stages{
+        stage('git clone'){
+            steps{
+                git branch: 'master', url: 'https://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@github.com/Israelgarate/Framework_Automatizacion_standard.git'
+                sh 'pwd'
+            }
+        }
+        stage('exec gradle'){
+            steps{
+                sh 'gradle --version'
+                sh 'gradle runWithCucumber -P tags=${tag} > launch.txt'
+                sh 'ls'
+                sh 'bash tokenXray.sh'
+                sh 'cd results && export tempUrl=$(cat url.txt) && curl -H \'Authorization: Basic ZGllZ28uYnVzdGFtYW
+            }
+        }
+    }
+}
