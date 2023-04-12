@@ -21,7 +21,7 @@ pipeline{
                 sh 'gradle runWithCucumber -P tags=${tag} > launch.txt'
                 sh 'ls'
                 sh 'bash tokenXray.sh'
-                sh cd results && export tempUrl=$(cat url.txt) && curl -H \'Authorization: Basic aXNyYWVsLmdhcmF0ZUB0c29mdGxhdGFtLmNvbTpJM3czTVZ1WEJWNDl0M0ZTTDFiWjFDQUM=\' -X POST $tempUrl  -H \"Content-Type:multipart/form-data\" -H \'X-Atlassian-Token: no-check\' -F \'file=@"reporteQA.pdf\"\' && rm url.txt'
+                sh 'cd results && export tempUrl=$(cat url.txt) && curl -H \'Authorization: Basic aXNyYWVsLmdhcmF0ZUB0c29mdGxhdGFtLmNvbTpJM3czTVZ1WEJWNDl0M0ZTTDFiWjFDQUM=\' -X POST $tempUrl  -H \"Content-Type:multipart/form-data\" -H \'X-Atlassian-Token: no-check\' -F \'file=@"reporteQA.pdf\"\' && rm url.txt'
             }
         }
     }
