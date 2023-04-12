@@ -4,13 +4,13 @@ Feature: Busqueda de google, se esperar realizar e ingresar a una pagina utiliza
   Background:
   Given Ingresar a google
 
-  @google @tsoft
+  @TEST_DB-387
   Scenario: Busqueda google
     When introduzco la palabra "Bci"
     And selecciono el resultado de la busqueda "Bci"
     Then se visualiza la pagina "https://www.bci.cl/personas"
 
-  @google @parametrico
+  @TEST_DB-389
   Scenario Outline: Busqueda google parametrizada
     When introduzco la palabra "<Busqueda>"
     And selecciono el resultado de la busqueda "<Busqueda>"
