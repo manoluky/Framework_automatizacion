@@ -1,29 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="3" time="23.719">
-    <testcase classname="Busqueda de google, se esperar realizar e ingresar a una pagina utilizando el buscador de google." name="Busqueda google" time="7.91">
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="4" time="7.488">
+    <testcase classname="Demo base da datos" name="confirmar rut y clave en base de datos." time="2.249">
         <system-out>
-            <![CDATA[Given Ingresar a google.....................................................passed
-When introduzco la palabra "Tsoft"..........................................passed
-And selecciono el resultado de la busqueda "Tsoft"..........................passed
-Then se visualiza la pagina "https://www.tsoftglobal.com/"..................passed
+            <![CDATA[Given Generar Conexion Base de datos........................................passed
+When realizo consulta con "7322875-1" y "Tsoft2023" a base de datos.........passed
+Then recibo mensaje "correcta" de validación de credenciales................passed
 ]]>
         </system-out>
     </testcase>
-    <testcase classname="Busqueda de google, se esperar realizar e ingresar a una pagina utilizando el buscador de google." name="Busqueda google parametrizada" time="7.239">
+    <testcase classname="Demo base da datos" name="confirmar rut y clave en base de datos. 2" time="1.676">
         <system-out>
-            <![CDATA[Given Ingresar a google.....................................................passed
-When introduzco la palabra "Tsoft"..........................................passed
-And selecciono el resultado de la busqueda "Tsoft"..........................passed
-Then se visualiza la pagina "https://www.tsoftglobal.com/"..................passed
+            <![CDATA[Given Generar Conexion Base de datos........................................passed
+When realizo consulta con "16093070-5" y "Tsoft2024" a base de datos........passed
+Then recibo mensaje "incorrecta" de validación de credenciales..............passed
 ]]>
         </system-out>
     </testcase>
-    <testcase classname="Busqueda de google, se esperar realizar e ingresar a una pagina utilizando el buscador de google." name="Busqueda google parametrizada 2" time="8.439">
+    <testcase classname="Demo base da datos" name="confirmar rut y clave en base de datos. 3" time="1.687">
         <system-out>
-            <![CDATA[Given Ingresar a google.....................................................passed
-When introduzco la palabra "Jira"...........................................passed
-And selecciono el resultado de la busqueda "Jira"...........................passed
-Then se visualiza la pagina "https://www.atlassian.com/es/software/jira"....passed
+            <![CDATA[Given Generar Conexion Base de datos........................................passed
+When realizo consulta con "18736467-1" y "HolaMundo" a base de datos........passed
+Then recibo mensaje "incorrecta" de validación de credenciales..............passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="Demo base da datos" name="confirmar rut y clave en base de datos. 4" time="1.612">
+        <system-out>
+            <![CDATA[Given Generar Conexion Base de datos........................................passed
+When realizo consulta con "9594683-6" y "Tsoft2023" a base de datos.........passed
+Then recibo mensaje "correcta" de validación de credenciales................passed
 ]]>
         </system-out>
     </testcase>

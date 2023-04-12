@@ -6,9 +6,9 @@ Feature: Busqueda de google, se esperar realizar e ingresar a una pagina utiliza
 
   @google @tsoft
   Scenario: Busqueda google
-    When introduzco la palabra "Tsoft"
-    And selecciono el resultado de la busqueda "Tsoft"
-    Then se visualiza la pagina "https://www.tsoftglobal.com/"
+    When introduzco la palabra "Bci"
+    And selecciono el resultado de la busqueda "Bci"
+    Then se visualiza la pagina "https://www.bci.cl/personas"
 
   @google @parametrico
   Scenario Outline: Busqueda google parametrizada
@@ -19,4 +19,4 @@ Feature: Busqueda de google, se esperar realizar e ingresar a una pagina utiliza
     Examples:
       | Busqueda | Url                                        |
       | Tsoft    | https://www.tsoftglobal.com/               |
-      | Jira     | https://www.atlassian.com/es/software/jira |
+      | Bci      | https://www.bci.cl/personas |

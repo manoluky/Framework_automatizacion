@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
                  plugin = {"pretty", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
                 		 ,"json:results/cucumber.json"
                 		 ,"junit:results/cucumber.xml"},
-		         tags = "",
+		         tags = "@TEST_RA-200",
                  monochrome = true)
 
 public class WebBaseRunner extends Hooks{

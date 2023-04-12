@@ -42,6 +42,7 @@ private String extensionDriver = "";
 					//chromeOptions.addArguments("--ignore-certificate-errors");
 					//chromeOptions.addArguments("--disable-extensions");
 					chromeOptions.addArguments("--remote-debugging-port=9222");
+					chromeOptions.addArguments("--remote-allow-origins=*");
 					//chromeOptions.addArguments("--disable-gpu");
 					//chromeOptions.addArguments("--no-sandbox");
 					//chromeOptions.addArguments("--window-size=1920x1080");
@@ -49,6 +50,7 @@ private String extensionDriver = "";
 
 				}
 				WebDriverManager.chromedriver().setup();
+				chromeOptions.addArguments("--remote-allow-origins=*");
     	        this.driver = (WebDriver)new ChromeDriver(chromeOptions);
     	        this.driver.manage().deleteAllCookies();
     	        break;
