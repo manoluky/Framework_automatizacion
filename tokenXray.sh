@@ -9,7 +9,7 @@ cat log.txt
 export TESTEXECUTION=$(grep "DB-" log.txt | cut -d '"' -f 8)
 echo "ID de ejecucion: $TESTEXECUTION"
 echo "Attachment para ejecucion"
-export url=https://integracionx-ray.atlassian.net/rest/api/3/issue/$TESTEXECUTION/attachments
+export url=https://tsoftespana.atlassian.net/rest/api/3/issue/$TESTEXECUTION/attachments
 echo $url
 cd results/
 pwd
