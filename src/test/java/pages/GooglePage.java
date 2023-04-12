@@ -49,7 +49,6 @@ public class GooglePage {
 
 
     public void ingresoAPaginaSolicitada(String search){
-        MetodosGenericos.esperar(10);
         By resultadoBusqueda = By.xpath("(//h3[contains(text(),"+search+")])[1]");
         WebElement resultado = DriverContext.getDriver().findElement(resultadoBusqueda);
         resultado.click();
