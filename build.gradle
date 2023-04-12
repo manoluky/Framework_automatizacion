@@ -62,7 +62,7 @@ task runWithCucumber() {
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = [
                     '--plugin', 'pretty' ,
-                    '--plugin', 'json:src/test/resources/output/report/Cucumber.json',
+                    '--plugin', 'json:results/Cucumber.json',
                     '--plugin', 'com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:',
                     '--glue', 'steps',
                     'src/test/resources/features',
