@@ -34,7 +34,7 @@ public class GooglePage {
     public void ingresoTextoBusqueda(String search){
         try {
             MetodosGenericos.esperar(10);
-            boolean validarInputText = MetodosGenericos.visualizarObjeto(inputText, 5);
+            boolean validarInputText = MetodosGenericos.visualizarObjeto(inputText, 40);
             if(validarInputText){
                 inputText.sendKeys(search);
                 inputText.sendKeys(Keys.ENTER);
