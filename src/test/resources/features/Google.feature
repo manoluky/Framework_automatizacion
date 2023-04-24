@@ -8,7 +8,7 @@ Feature: Busqueda de google, se esperar realizar e ingresar a una pagina utiliza
   Scenario: Busqueda google
     When introduzco la palabra "Tsoft"
     And selecciono el resultado de la busqueda "Tsoft"
-    Then se visualiza la pagina "https://www.tsoftglobal.com/en/home-english/"
+    Then se visualiza la pagina "https://www.tsoftglobal.com/"
 
   @TEST_DB-389
   Scenario Outline: Busqueda google parametrizada

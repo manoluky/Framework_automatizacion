@@ -14,13 +14,9 @@ public class RecursosController {
         try {
             if (!dataTest.isEmpty()) {
                 switch (dataTest){
-
-
-
                         default:
                             Assert.fail("nombre del parametro '" + dataTest + "' no controlado, necesita revision");
                             break;
-
                     }
 
             }

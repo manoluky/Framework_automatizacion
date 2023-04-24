@@ -26,7 +26,6 @@ public class Google {
 
     @Then("se visualiza la pagina {string}")
     public void seVisualizaLaPagina(String result) {
-        MetodosGenericos.esperar(5);
         String url = DriverContext.getDriver().getCurrentUrl();
         assertEquals(result, url);
     }

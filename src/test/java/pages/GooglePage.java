@@ -24,7 +24,7 @@ public class GooglePage {
         PageFactory.initElements(this.driver, this);
     }
 
-    @FindBy(xpath = "//input[@name=\"q\"]")
+    @FindBy(xpath = "//textarea[@name=\"q\"]")
     WebElement inputText;
 
     @FindBy(xpath = "//input[@name=\"btnK\"]")
@@ -33,8 +33,7 @@ public class GooglePage {
 
     public void ingresoTextoBusqueda(String search){
         try {
-            MetodosGenericos.esperar(10);
-            boolean validarInputText = MetodosGenericos.visualizarObjeto(inputText, 40);
+            boolean validarInputText = MetodosGenericos.visualizarObjeto(inputText, 10);
             if(validarInputText){
                 inputText.sendKeys(search);
                 inputText.sendKeys(Keys.ENTER);
@@ -50,7 +49,6 @@ public class GooglePage {
 
 
     public void ingresoAPaginaSolicitada(String search){
-        MetodosGenericos.esperar(10);
         By resultadoBusqueda = By.xpath("(//h3[contains(text(),"+search+")])[1]");
         WebElement resultado = DriverContext.getDriver().findElement(resultadoBusqueda);
         resultado.click();

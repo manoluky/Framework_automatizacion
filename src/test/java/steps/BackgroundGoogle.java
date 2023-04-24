@@ -3,6 +3,7 @@ package steps;
 import constants.Navegador;
 import driverConfig.DriverContext;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import pages.GooglePage;
 import util.MetodosGenericos;
 
@@ -19,4 +20,7 @@ public class BackgroundGoogle {
         String url = DriverContext.getDriver().getCurrentUrl();
         assertEquals(URL_GOOGLE, url);
     }
+
+
+
 }
