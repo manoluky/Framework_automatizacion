@@ -1,8 +1,8 @@
 {
   "fields": {
     "project":{
-      "id": "10013",
-      "key": "DB"
+      "id": "10000",
+      "key": "RQBD"
     },
     "summary": "Ejecución Demo Aut. BCI",
     "issuetype": {
@@ -10,6 +10,6 @@
     }
   },
   "xrayFields": {
-    "testPlanKey": "DB-386"
+    "testPlanKey": "RQBD-6"
   }
 }
