@@ -81,6 +81,7 @@ public class BciPage {
                 text = TextCategorias;
         }
         try {
+            MetodosGenericos.moverPantalla(text);
             boolean validarTextCategoria = MetodosGenericos.visualizarObjeto(text, 10);
             if(validarTextCategoria){
                 Assert.assertEquals("Categorías que te pueden interesar",text.getText());
