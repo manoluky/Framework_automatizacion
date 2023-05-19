@@ -1,0 +1,22 @@
+{
+  "fields": {
+    "project": {
+      "id": "10001"
+    },
+    "summary": "Brand new Test execution",
+    "issuetype": {
+      "id": "10008"
+    },
+    "description": "[~accountid:610ab842ec92ab0070d8bbc0]",
+    "labels": [
+      "LABEL"
+    ],
+    "customfield_10039": {
+      "value": "Smoke test",
+      "id": "10027"
+    }
+  },
+    "xrayFields": {
+      "testPlanKey": "XRAY"
+  }
+}
