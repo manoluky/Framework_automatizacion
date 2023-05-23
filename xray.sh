@@ -4,7 +4,7 @@ export token=$(curl -H "Content-Type: application/json" -X POST --data @"cloud_a
 echo $token
 echo "Token Generado"
 echo "Cargando TestExecution"
-curl -H "Authorization: Bearer $token" -X POST 'https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart' -H "Content-Type:multipart/form-data" -F 'info=@"infra/info.json"' -F 'results=@"results/Cucumber.json"' > log.txt
+curl -H "Authorization: Bearer $token" -X POST 'https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart' -H "Content-Type:multipart/form-data" -F 'info=@"Info.json"' -F 'results=@"results/Cucumber.json"' > log.txt
 cat log.txt
 export TESTEXECUTION=$(grep "XRAY-" log.txt | cut -d '"' -f 8)
 echo "ID de ejecucion: $TESTEXECUTION"
