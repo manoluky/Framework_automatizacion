@@ -1,7 +1,7 @@
 {
   "fields": {
     "project": {
-      "id": "10001"
+      "id": "10031"
     },
     "summary": "Brand new Test execution",
     "issuetype": {
@@ -10,11 +10,7 @@
     "description": "[]",
     "labels": [
       "LABEL"
-    ],
-    "customfield_10039": {
-      "value": "Smoke test",
-      "id": "10027"
-    }
+    ]
   },
     "xrayFields": {
       "testPlanKey": "XRAY-18"
