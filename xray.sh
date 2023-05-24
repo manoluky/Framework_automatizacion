@@ -11,6 +11,9 @@ echo "ID de ejecucion: $TESTEXECUTION"
 echo "Attachment para ejecucion"
 #export url=https://capacitacionxray9.atlassian.net/rest/api/3/issue/$TESTEXECUTION/attachments
 export url=https://capacitacionxray9.atlassian.net/rest/api/3/issue/XRAY-18/attachments
+echo "VERIFICANDO URL"
 echo $url
+echo "ACCESO A CARPETA RESULTS"
 cd results/
+echo "ENVIO DE ARCHIVO"
 curl -H 'Authorization: Basic YWFyb24uYmFycmFAdHNvZnRsYXRhbS5jb206QVRBVFQzeEZmR0YwWFZLWl91NldZU2ltOEZ0NjFQWTZvZTB5WWlGejNRQkloeGtRZ0NJdlFCNkktdXpRdHZoTnpWWDQtM3BvVEtIODhqLXdFdmF3NFdDVjdNbzkwTDQ5OXRjNEVlcmxzM3oyWmxDTS1mMmpDckQ0WFRFeXB1bmJuOXRTYzRQcFIwNFlBcG9yXzRxWmZBNFR0WjVhWWRrOHNmajZnLTVzYlA0UkJ0VWZrWTZxc0hzPTFGN0IzMEVG' -X POST $url -H "Content-Type:multipart/form-data" -H 'X-Atlassian-Token: no-check' -F file=@"reporteQA.pdf"'
