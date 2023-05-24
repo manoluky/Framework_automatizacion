@@ -10,7 +10,7 @@ export TESTEXECUTION=$(grep "XRAY-" log.txt | cut -d '"' -f 8)
 echo "ID de ejecucion: $TESTEXECUTION"
 echo "Attachment para ejecucion"
 #export url=https://capacitacionxray9.atlassian.net/rest/api/3/issue/$TESTEXECUTION/attachments
-export url=https://capacitacionxray9.atlassian.net/rest/api/3/issue/XRAY-18/attachments
+export url=https://capacitacionxray9.atlassian.net/rest/api/3/issue/XRAY-20/attachments
 echo $url
 cd results/
 pwd
