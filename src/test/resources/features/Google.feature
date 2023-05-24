@@ -8,4 +8,4 @@ Feature: Test Docker
 	Scenario: Test Docker
 		When introduzco la palabra "Tsoft"
 		  And selecciono el resultado de la busqueda "Tsoft"
-		  Then se visualiza la pagina "https://www.tsoftglobal.com/
+		  Then se visualiza la pagina "https://www.tsoftglobal.com/"
