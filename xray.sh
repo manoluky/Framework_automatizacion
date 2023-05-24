@@ -1,4 +1,6 @@
 #!/bin/bash
+echo "archivos antes de crear token"
+ls -ls
 echo "Generando token"
 export token=$(curl -H "Content-Type: application/json" -X POST --data @"cloud_auth.json" https://xray.cloud.getxray.app/api/v2/authenticate| tr -d '"')
 echo $token
@@ -13,8 +15,11 @@ echo "Attachment para ejecucion"
 export url=https://capacitacionxray9.atlassian.net/rest/api/3/issue/XRAY-18/attachments
 echo "VERIFICANDO URL"
 echo $url
+echo "archivos antes de ir a la carpeta results"
+ls -ls
 echo "ACCESO A CARPETA RESULTS"
 cd results/
+echo "archivos carpeta results"
 ls -ls
 pwd
 echo "ENVIO DE ARCHIVO"
