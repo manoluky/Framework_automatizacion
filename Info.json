@@ -1,9 +1,9 @@
 {
   "fields": {
     "project": {
-      "id": "10001"
+      "id": "10004"
     },
-    "summary": "Brand new Test execution",
+    "summary": "Resultado Testing Continuo",
     "issuetype": {
       "id": "10008"
     },
