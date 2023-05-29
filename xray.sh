@@ -1,5 +1,6 @@
 #!/bin/bash
 TAG=$1
+echo "EL TAG A UTILIZAR ES: ---> " $TAG
 xvfb-run -a --server-args="-screen 0 1920x1080x24" gradle runWithCucumber -P tags=$TAG ; exit 0
 echo "archivos antes de crear token"
 ls -ls
