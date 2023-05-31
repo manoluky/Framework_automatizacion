@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "archivos antes de crear token"
-ls -ls
+ls 
 echo "Generando token"
 export token=$(curl -H "Content-Type: application/json" -X POST --data @"cloud_auth.json" https://xray.cloud.getxray.app/api/v2/authenticate| tr -d '"')
 echo $token
