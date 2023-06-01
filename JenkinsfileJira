@@ -1,21 +1,16 @@
 pipeline {
     agent any
-    environment {
-        TESTPLAN = "${params.TESTPLAN}"
-        TAG = "${params.TAG}"
-    }
     tools {
         gradle "gr8.0.1"
     }
     environment {
-        REPOSITORIO = "https://github.com/aaronbarra/Framework_Automatizacion.git"
-        TAG = "@TEST_PX-3"
+        TAG = "${params.TAG}"
     }
     stages {
         stage('CleanWorkspace') {
-            steps {
-                cleanWs()
-            }
+          steps {
+             cleanWs()
+          }
         }
         stage('CloneDockerFiles'){
           steps{
@@ -23,13 +18,11 @@ pipeline {
             sh 'chmod +x ${WORKSPACE}/app/entrypoint.sh'
           }
         }
-        
         stage('Ejecucion Docker'){
-            steps{
-                sh 'ls'
-                //sh 'docker compose up'
-                sh 'docker run -e REPOSITORIO=https://github.com/aaronbarra/Framework_Automatizacion.git -e TAG=@TEST_PX-3 dockertc-docker-tc'
+          steps{
+            sh 'ls'a
+            sh 'docker run -e REPOSITORIO=https://github.com/aaronbarra/Framework_Automatizacion.git -e TAG=@${TAG} dockertc-docker-tc'
+        }
       }
     }
   }
-}
