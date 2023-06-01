@@ -6,7 +6,7 @@ export token=$(curl -H "Content-Type: application/json" -X POST --data @"cloud_a
 echo $token
 echo "Token Generado"
 echo "Personalizacion Jira"
-if [TIPO=1]; then
+if ["$TIPO"=="1"]; then
   sed -i 's/"summary": "a"/"summary": "Resultado Testing Continuo JIRA "/g' Info.json
 else
   sed -i 's/"summary": "a"/"summary": "Resultado Testing Continuo GIT "/g' Info.json
