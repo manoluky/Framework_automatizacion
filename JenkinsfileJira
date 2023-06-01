@@ -20,8 +20,7 @@ pipeline {
         }
         stage('Ejecucion Docker'){
           steps{
-            sh 'ls'
-            sh 'docker run -e REPOSITORIO=${REPOSITORIO} -e TAG=${TAG} dockertc-docker-tc'
+            sh 'docker run -e REPOSITORIO=${REPOSITORIO} -e TAG=${TAG} -e TIPO=1 dockertc-docker-tc'
         }
       }
     }
