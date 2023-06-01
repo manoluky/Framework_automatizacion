@@ -24,7 +24,7 @@ pipeline {
             steps{
                 sh 'ls'
                 //sh 'docker compose up'
-                sh 'docker run -e REPOSITORIO=https://github.com/aaronbarra/Framework_Automatizacion.git -e TAG=@TEST_PX-3 TIPO=0 dockertc-docker-tc'
+                sh 'docker run -e REPOSITORIO=https://github.com/aaronbarra/Framework_Automatizacion.git -e TAG=@TEST_PX-3 -e TIPO=0 dockertc-docker-tc'
         }
     }
         
