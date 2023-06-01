@@ -61,7 +61,7 @@ pipeline {
       }
     post {
         success {
-          echo 'El despliegue al ambiente PROD ha sido exitoso'
+          echo 'El desplieue al ambiente PROD ha sido exitoso'
           sh '''sed -i 's/"summary": "TITULOJSON"/"summary": "Despliegue PROD exitoso"/g' integracion/jira.json'''
           sh """sed -i 's/"description": "Test exitoso"/"description": "Ejecucion Jenkins:  ${env.BUILD_TAG}  [~accountid:63d93e141b13d42998e0e160] "/g' integracion/jira.json"""
           sh '''
