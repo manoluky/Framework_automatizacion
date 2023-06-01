@@ -64,7 +64,7 @@ pipeline {
         success {
           echo 'El desplieue al ambiente PROD ha sido exitoso'
           sh '''sed -i 's/"summary": "TITULOJSON"/"summary": "Despliegue PROD exitoso"/g' integracion/jira.json'''
-          sh """sed -i 's/"description": "Test exitoso"/"description": "Ejecucion Jenkins:  ${env.BUILD_TAG}  [~accountid:63d93e141b13d42998e0e160] "/g' integracion/jira.json"""
+          sh """sed -i 's/"decription": "Test exitoso"/"description": "Ejecucion Jenkins:  ${env.BUILD_TAG}  [~accountid:63d93e141b13d42998e0e160] "/g' integracion/jira.json"""
           sh '''
           curl -H "Content-Type: multipart/form-data" -X POST -F info=@integracion/jira.json -F results=@integracion/prueba-passed.json -H "Authorization: Bearer $TOKEN" https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
           '''
