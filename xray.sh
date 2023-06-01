@@ -5,7 +5,7 @@ export token=$(curl -H "Content-Type: application/json" -X POST --data @"cloud_a
 echo $token
 echo "Token Generado"
 echo "Personalizacion Jira"
-sed -i 's/"summary": "a"/"summary": "Resultado Testing Continuo GIT "/g' integracion/jira.json
+sed -i 's/"summary": "a"/"summary": "Resultado Testing Continuo GIT "/g' Info.json
 echo "Cargando TestExecution"
 curl -H "Authorization: Bearer $token" -X POST 'https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart' -H "Content-Type:multipart/form-data" -F 'info=@"Info.json"' -F 'results=@"results/Cucumber.json"' > log.txt
 cat log.txt
