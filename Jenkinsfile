@@ -24,7 +24,7 @@ pipeline {
         stage('Ejecucion Docker'){
             steps{
                 //sh 'docker compose up'
-                sh 'docker run -e REPOSITORIO=https://github.com/aaronbarra/Framework_Automatizacion.git -e TAG=@TEST_PX-3 -e TIPO=1 dockertc_docker-tc'
+                sh 'docker run -e REPOSITORIO=https://github.com/aaronbarra/Framework_Automatizacion.git -e TAG=@TEST_PX-3 -e TIPO=0 dockertc_docker-tc'
         }
     }
         
