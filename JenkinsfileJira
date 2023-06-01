@@ -21,7 +21,7 @@ pipeline {
         stage('Ejecucion Docker'){
           steps{
             sh 'ls'
-            sh 'docker run -e REPOSITORIO=https://github.com/aaronbarra/Framework_Automatizacion.git -e TAG=@${TAG} dockertc-docker-tc'
+            sh 'docker run -e REPOSITORIO=${REPOSITORIO} -e TAG=${TAG} dockertc-docker-tc'
         }
       }
     }
