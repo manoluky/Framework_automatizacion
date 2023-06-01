@@ -11,6 +11,7 @@ curl -H "Authorization: Bearer $token" -X POST 'https://xray.cloud.getxray.app/a
 cat log.txt
 export TESTEXECUTION=$(grep "PX-" log.txt | cut -d '"' -f 8)
 export TESTPLAN=$(cat Info.json | jq -r '.xrayFields.testPlanKey')
+echo "ID de TestPlan: ${TESTPLAN}"
 echo "ID de ejecucion: ${TESTEXECUTION}"
 echo "Attachment para ejecucion"
 export url=https://capacitacionxray9.atlassian.net/rest/api/3/issue/${TESTEXECUTION}/attachments
