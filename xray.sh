@@ -7,9 +7,9 @@ echo $token
 echo "Token Generado"
 echo "Personalizacion Jira"
 if [ $TIPO -eq 1 ]; then
-  sed -i 's/"summary": "a"/"summary": "Resultado Testing Continuo JIRA "/g' Info.json
+  sed -i 's/"summary": "a"/"summary": "Resultado Prueba Automatizada ON-DEMAND "/g' Info.json
 else
-  sed -i 's/"summary": "a"/"summary": "Resultado Testing Continuo GIT "/g' Info.json
+  sed -i 's/"summary": "a"/"summary": "Resultado Prueba Automatizada PIPELINE "/g' Info.json
 fi
 sed -i 's/"description": "[]"/"description": "[~accountid:63d93e141b13d42998e0e160]"/g' Info.json
 
