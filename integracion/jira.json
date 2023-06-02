@@ -1,8 +1,8 @@
 {
      "fields": {
         "project": {
-            "id": "10000",
-            "key": "IXR"
+            "id": "10004",
+            "key": "PX"
         },
         "summary": "TITULOJSON",
         "description": "Test exitoso",
@@ -12,6 +12,6 @@
     },
 
     "xrayFields": {
-        "testPlanKey": "IXR-144" 
+        "testPlanKey": "PX-1" 
     }
 }
