@@ -45,7 +45,7 @@ pipeline {
         cleanWs()
         script {
             withCredentials([string(credentialsId: 'healenium_token', variable: 'HEALENIUM_TOKEN')]) {
-                git branch: 'master', url: "https://${HEALENIUM_TOKEN}@github.com/dbustamanter/Healenium_POC.git"
+                git branch: 'mastr', url: "https://${HEALENIUM_TOKEN}@github.com/dbustamanter/Healenium_POC.git"
             }
         }
         sh 'gradle runWithCucumber -P tags=@TEST_IXR-93'
