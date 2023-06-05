@@ -5,7 +5,7 @@
             "key": "PX"
         },
         "summary": "TITULOJSON",
-        "description": "Clonado con exito",
+        "description": "Fallo al clonar",
         "issuetype": {
             "name": "Test Execution"
         }
