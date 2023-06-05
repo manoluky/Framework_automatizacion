@@ -13,10 +13,10 @@ fi
 
 if grep -q "BUILD SUCCESSFUL" logGradle.txt; then
   echo "PASO"
-  sed -i 's/"description": "Git"/"description": "Ejecucion exitosa"/g' integracion/jira.json
+  sed -i 's/"description": "Clonado con exito"/"description": "Ejecucion exitosa"/g' integracion/jira.json
 else
   echo "FALLO"
-  sed -i 's/"description": "Git"/"description": "Ejecucion fallida"/g' integracion/jira.json
+  sed -i 's/"description": "Clonado con exito"/"description": "Ejecucion fallida"/g' integracion/jira.json
 fi
 #sed -i 's/"description": "USUARIOJ"/"description": "[~accountid:63d93e141b13d42998e0e160][~accountid:610ab6d00b454a00681fbd5e]"/g' Info.json
 echo "Cargando TestExecution"
