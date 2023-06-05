@@ -5,3 +5,8 @@ xvfb-run -a --server-args="-screen 0 1920x1080x24" gradle runWithCucumber -P tag
 cat "IMPRIMIENDO RESULTADO LOG"
 cat logGradle.txt
  
+if grep -q "BUILD SUCCESSFUL" logGradle.txt; then
+  echo "SUCCESS"
+else
+  echo "FAILURE"
+fi
