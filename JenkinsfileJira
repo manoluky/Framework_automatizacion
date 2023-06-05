@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Ejecucion Docker'){
           steps{
-            sh 'docker run -e RAM=${RAMA} -e TAG=${TAG} -e TIPO=1 dockertc-test-gradle-lab-tc'
+            sh 'docker run -e RAM=${RAMA} -e TAG=${TAG} -e TIPO=1 dockertc-test-gradle-lab'
         }
       }
     }
