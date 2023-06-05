@@ -10,6 +10,15 @@ if [ $TIPO -eq 1 ]; then
 else
   sed -i 's/"summary": "Clonacion exitosa"/"summary": "Resultado Prueba Automatizada PIPELINE "/g' integracion/jira.json
 fi
+
+if grep -q "BUILD SUCCESSFUL" logGradle.txt; then
+  echo "PASO"
+  sed -i 's/"description": "Test exitoso"/"summary": "Ejecucion exitosa"/g' integracion/jira.json
+else
+  echo "FALLO"
+  sed -i 's/"description": "Test exitoso"/"summary": "Ejecucion fallida"/g' integracion/jira.json
+  exit 0
+fi
 #sed -i 's/"description": "USUARIOJ"/"description": "[~accountid:63d93e141b13d42998e0e160][~accountid:610ab6d00b454a00681fbd5e]"/g' Info.json
 echo "Cargando TestExecution"
 curl -H "Authorization: Bearer $token" -X POST 'https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart' -H "Content-Type:multipart/form-data" -F 'info=@"integracion/jira.json"' -F 'results=@"results/Cucumber.json"' > log.txt
