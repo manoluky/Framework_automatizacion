@@ -4,6 +4,7 @@ pipeline {
         gradle "gr8.0.1"
     }
     environment {
+        RAMA = "${params.RAMA}"
         TAG = "${params.TAG}"
     }
     stages {
