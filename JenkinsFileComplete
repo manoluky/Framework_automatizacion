@@ -1,215 +1,164 @@
 pipeline {
-  agent any
-  tools {
-    gradle "gr8.0.1"
-    nodejs "node"
-  }
-  environment {
-    RAMA = "main"
-    TAG = "@TEST_PX-3"
-    TIPO = 0
-  }
-  stages {
-    stage('CleanWorkspace') {
-      steps {
-        cleanWs()
-      }
+    agent any
+    tools {
+        gradle "gr8.0.1"
+        nodejs "node"
     }
-    stage('gitClone') {
-      steps {
-        git branch: 'develop', url: 'https://github.com/dbustamanter/prueba.dibrsite.com.git'
-        script {
-          env.TOKEN = sh(
-            script: 'curl -H "Content-Type: application/json" -X POST --data @"integracion/cloud_auth.json" https://xray.cloud.getxray.app/api/v2/authenticate | tr -d "\\""',
-            returnStdout: true
-          ).trim()
-          sh 'export TOKEN=$TOKEN'
-        }
-      }
-      post {
-        success {
-          echo 'La clonación del repositorio ha sido exitosa'
-          sh '''
-          sed -i 's / "summary": "TITULOJSON" / "summary": "Clonacion exitosa" / g ' integracion/jira.json
-          '''
-          sh '''
-          curl - H "Content-Type: multipart/form-data" - X POST - F info = @integracion / jira.json - F results = @integracion / prueba - passed.json - H "Authorization: Bearer $TOKEN"
-          https: //xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
-          '''
-        }
-        failure {
-          echo 'La clonación del repositorio ha fallado'
-          sh '''
-          sed -i 's / "summary": "TITULOJSON" / "summary": "Clonacion fallida" / g ' integracion/jira.json
-          '''
-          sh '''
-          sed -i 's / "description": "Test exitoso" / "description": "Test fallido" / g ' integracion/jira.json
-          '''
-          sh '''
-          curl - H "Content-Type: multipart/form-data" - X POST - F info = @integracion / jira.json - F results = @integracion / prueba - failed.json - H "Authorization: Bearer $TOKEN"
-          https: //xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
-          '''
-        }
-      }
+    environment {
+        TESTPLAN = "IXR-94"
+        RAMA = "main"
+        TAG = "@TEST_PX-3"
+        TIPO = 0
     }
-    stage('Pruebas unitarias') {
-      steps {
-        echo "$TAG"
-        sh 'npm install'
-        script {
-          try {
-            def testResult = sh(returnStdout: true, script: 'npm test || exit 1')
-            echo "Resultado de la prueba: ${testResult}"
-          } catch (err) {
-            if (err instanceof hudson.AbortException && err.getMessage().contains("exit code 1")) {
-              echo "La prueba falló. Por favor, revise su código."
-              sh '''
-              sed -i 's / "summary": "Clonacion exitosa" / "summary": "Prueba unitaria fallida" / g ' integracion/jira.json
-              '''
-              sh '''
-              sed -i 's / "description": "Test exitoso" / "description": "Test fallido" / g ' integracion/jira.json
-              '''
-              sh '''
-              curl - H "Content-Type: multipart/form-data" - X POST - F info = @integracion / jira.json - F results = @integracion / prueba - failed.json - H "Authorization: Bearer $TOKEN"
-              https: //xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
-                ''
-              '
-              throw err
-            } else {
-              echo "Prueba exitosa"
-              throw err
+    stages {
+        stage('CleanWorkspace') {
+            steps {
+                cleanWs()
+            }
+        }
+        stage('gitClone') {
+          steps {
+            git branch: 'develop', url: 'https://github.com/dbustamanter/prueba.dibrsite.com.git'
+            script {
+              env.TOKEN = sh(
+                script: 'curl -H "Content-Type: application/json" -X POST --data @"integracion/cloud_auth.json" https://xray.cloud.getxray.app/api/v2/authenticate | tr -d "\\""',
+                returnStdout: true
+              ).trim()
+              sh 'export TOKEN=$TOKEN'
             }
           }
-          sh '''
-          sed -i 's / "summary": "Clonacion exitosa" / "summary": "Prueba unitaria exitosa" / g ' integracion/jira.json
-          '''
-          sh '''
-          curl - H "Content-Type: multipart/form-data" - X POST - F info = @integracion / jira.json - F results = @integracion / prueba - passed.json - H "Authorization: Bearer $TOKEN"
-          https: //xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
-          '''
-        }
-      }
-    }
-    stage('Deploy QA') {
-      steps {
-        sh 'cp -r $WORKSPACE/* /var/www/html/qa'
-      }
-      post {
-        success {
-          echo 'El despliegue al ambiente QA ha sido exitoso'
-          sh '''
-          sed -i 's / "summary": "Prueba unitaria exitosa" / "summary": "Despliegue QA exitoso" / g ' integracion/jira.json
-          '''
-          sh '''
-          curl - H "Content-Type: multipart/form-data" - X POST - F info = @integracion / jira.json - F results = @integracion / prueba - passed.json - H "Authorization: Bearer $TOKEN"
-          https: //xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
-          '''
-        }
-        failure {
-          echo 'El despliegue al ambiente QA ha fallado'
-          sh '''
-          sed -i 's / "summary": "Prueba unitaria exitosa" / "summary": "Despliegue QA fallido" / g ' integracion/jira.json
-          '''
-          sh '''
-          sed -i 's / "description": "Test exitoso" / "description": "Test fallido" / g ' integracion/jira.json
-          '''
-          sh '''
-          curl - H "Content-Type: multipart/form-data" - X POST - F info = @integracion / jira.json - F results = @integracion / prueba - failed.json - H "Authorization: Bearer $TOKEN"
-          https: //xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
-          '''
-        }
-      }
-    }
-    stage('Automatizacion') {
-      steps {
-        cleanWs()
-        git branch: 'main', url: 'https://github.com/aaronbarra/DockerTC.git'
-        sh 'chmod +x ${WORKSPACE}/app/entrypoint.sh'
-        sh 'docker run -e RAMA=${RAMA} -e TAG=${TAG} -e TIPO=${TIPO} dockertc_test-gradle-lab'
-      }
-    }
-    stage('Merge Master') {
-      steps {
-        cleanWs()
-        git branch: 'develop', url: 'https://github.com/dbustamanter/prueba.dibrsite.com.git'
-        sh "git config --global user.email 'Tsoft@tsoftglobal.com'"
-        sh "git config --global user.name 'Tsoft'"
-        sh "git checkout master"
-        sh "git merge --no-ff -m 'Merge de cambios de develop' develop"
-        script {
-          withCredentials([string(credentialsId: 'merge_tokenppl', variable: 'MERGE_TOKENPPL')]) {
-            sh "git push -f https://${MERGE_TOKENPPL}@github.com/dbustamanter/prueba.dibrsite.com.git master"
+          post {
+            success {
+              echo 'La clonación del repositorio ha sido exitosa'
+              sh '''sed -i 's/"summary": "TITULOJSON"/"summary": "Clonacion exitosa"/g' integracion/jira.json'''
+              sh '''
+              curl -H "Content-Type: multipart/form-data" -X POST -F info=@integracion/jira.json -F results=@integracion/prueba-passed.json -H "Authorization: Bearer $TOKEN" https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
+              '''
+            }
+            failure {
+              echo 'La clonación del repositorio ha fallado'
+              sh '''sed -i 's/"summary": "TITULOJSON"/"summary": "Clonacion fallida"/g' integracion/jira.json'''
+              sh '''sed -i 's/"description": "Test exitoso"/"description": "Test fallido"/g' integracion/jira.json'''
+              sh '''
+              curl -H "Content-Type: multipart/form-data" -X POST -F info=@integracion/jira.json -F results=@integracion/prueba-failed.json -H "Authorization: Bearer $TOKEN" https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
+              '''
+            }
           }
         }
-      }
-      post {
-        success {
-          echo 'La migracion ha sido exitosa'
-          sh '''
-          sed -i 's / "summary": "TITULOJSON" / "summary": "Migracion exitosa" / g ' integracion/jira.json
-          '''
-          sh '''
-          curl - H "Content-Type: multipart/form-data" - X POST - F info = @integracion / jira.json - F results = @integracion / prueba - passed.json - H "Authorization: Bearer $TOKEN"
-          https: //xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
-          '''
+        stage('Pruebas unitarias') {
+        steps {
+            echo "$TESTPLAN"
+            echo "$TAG"
+            sh 'npm install'
+            script {
+                try {
+                    def testResult = sh(returnStdout: true, script: 'npm test || exit 1')
+                    echo "Resultado de la prueba: ${testResult}"
+                } catch (err) {
+                    if (err instanceof hudson.AbortException && err.getMessage().contains("exit code 1")) {
+                        echo "La prueba falló. Por favor, revise su código."
+                        sh '''sed -i 's/"summary": "Clonacion exitosa"/"summary": "Prueba unitaria fallida"/g' integracion/jira.json'''
+                        sh '''sed -i 's/"description": "Test exitoso"/"description": "Test fallido"/g' integracion/jira.json'''
+                        sh '''
+                        curl -H "Content-Type: multipart/form-data" -X POST -F info=@integracion/jira.json -F results=@integracion/prueba-failed.json -H "Authorization: Bearer $TOKEN" https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
+                        '''
+                        throw err
+                    } else {
+                        echo "Prueba exitosa"
+                        throw err
+                    }
+                }
+                sh '''sed -i 's/"summary": "Clonacion exitosa"/"summary": "Prueba unitaria exitosa"/g' integracion/jira.json'''
+                sh '''
+                curl -H "Content-Type: multipart/form-data" -X POST -F info=@integracion/jira.json -F results=@integracion/prueba-passed.json -H "Authorization: Bearer $TOKEN" https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
+                '''
+            }
         }
-        failure {
-          echo 'La migracion ha fallado.'
-          sh '''
-          sed -i 's / "summary": "TITULOJSON" / "summary": "Migracion fallida" / g ' integracion/jira.json
-          '''
-          sh '''
-          sed -i 's / "description": "Test exitoso" / "description": "Test fallido" / g ' integracion/jira.json
-          '''
-          sh '''
-          curl - H "Content-Type: multipart/form-data" - X POST - F info = @integracion / jira.json - F results = @integracion / prueba - failed.json - H "Authorization: Bearer $TOKEN"
-          https: //xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
-            ''
-          '
-        }
-      }
     }
-    stage('Deploy Prod') {
-      steps {
-        cleanWs()
-        git branch: 'master', url: 'https://github.com/dbustamanter/prueba.dibrsite.com.git'
-        sh 'cp -r $WORKSPACE/* /var/www/html/prod'
-      }
-      post {
-        success {
-          echo 'El despliegue al ambiente PROD ha sido exitoso'
-          sh '''
-          sed -i 's / "summary": "TITULOJSON" / "summary": "Despliegue PROD exitoso" / g ' integracion/jira.json
-          '''
-          sh """
-          sed -i 's/"
-          description ": "
-          Test exitoso "/"
-          description ": "
-          Ejecucion Jenkins: $ {
-            env.BUILD_TAG
-          } [~accountid: 63 d93e141b13d42998e0e160]
-          "/g' integracion/jira.json
-          """
-
-          sh '''
-          curl - H "Content-Type: multipart/form-data" - X POST - F info = @integracion / jira.json - F results = @integracion / prueba - passed.json - H "Authorization: Bearer $TOKEN"
-          https: //xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
-          '''
+        stage('Deploy QA') {
+          steps {
+            sh 'cp -r $WORKSPACE/* /var/www/html/qa'
+          }
+          post {
+            success {
+              echo 'El despliegue al ambiente QA ha sido exitoso'
+              sh '''sed -i 's/"summary": "Prueba unitaria exitosa"/"summary": "Despliegue QA exitoso"/g' integracion/jira.json'''
+              sh '''
+              curl -H "Content-Type: multipart/form-data" -X POST -F info=@integracion/jira.json -F results=@integracion/prueba-passed.json -H "Authorization: Bearer $TOKEN" https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
+              '''
+            }
+            failure {
+              echo 'El despliegue al ambiente QA ha fallado'
+              sh '''sed -i 's/"summary": "Prueba unitaria exitosa"/"summary": "Despliegue QA fallido"/g' integracion/jira.json'''
+              sh '''sed -i 's/"description": "Test exitoso"/"description": "Test fallido"/g' integracion/jira.json'''
+              sh '''
+              curl -H "Content-Type: multipart/form-data" -X POST -F info=@integracion/jira.json -F results=@integracion/prueba-failed.json -H "Authorization: Bearer $TOKEN" https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
+              '''
+            }
+          }
         }
-        failure {
-          echo 'El despliegue al ambiente PROD ha fallado'
-          sh '''
-          sed -i 's / "summary": "TITULOJSON" / "summary": "Despliegue PROD fallido" / g ' integracion/jira.json
-          '''
-          sh '''
-          sed -i '
-          s / "description": "Test exitoso" / "description": "Despliegue PROD fallido" / g ' integracion/jira.json
-          '''
-          sh '''
-          curl - H "Content-Type: multipart/form-data" - X POST - F info = @integracion / jira.json - F results = @integracion / prueba - failed.json - H "Authorization: Bearer $TOKEN"
-          https: //xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
-          '''
+        stage('Automatizacion') {
+          steps {
+            cleanWs()
+            git branch: 'main', url: 'https://github.com/aaronbarra/DockerTC.git'    
+            sh 'chmod +x ${WORKSPACE}/app/entrypoint.sh'
+            sh 'docker run -e RAMA=${RAMA} -e TAG=${TAG} -e TIPO=${TIPO} dockertc_test-gradle-lab'
+          }
+        }
+        stage('Merge Master') {
+          steps {
+            cleanWs()
+            git branch: 'develop', url: 'https://github.com/dbustamanter/prueba.dibrsite.com.git'
+            sh "git config --global user.email 'Tsoft@tsoftglobal.com'"
+            sh "git config --global user.name 'Tsoft'"
+            sh "git checkout master"
+            sh "git merge --no-ff -m 'Merge de cambios de develop' develop"
+            script {
+              withCredentials([string(credentialsId: 'merge_tokenppl', variable: 'MERGE_TOKENPPL')]){
+                sh "git push -f https://${MERGE_TOKENPPL}@github.com/dbustamanter/prueba.dibrsite.com.git master"
+              }
+            }
+          }
+          post {
+            success {
+              echo 'La migracion ha sido exitosa'
+              sh '''sed -i 's/"summary": "TITULOJSON"/"summary": "Migracion exitosa"/g' integracion/jira.json'''
+              sh '''
+              curl -H "Content-Type: multipart/form-data" -X POST -F info=@integracion/jira.json -F results=@integracion/prueba-passed.json -H "Authorization: Bearer $TOKEN" https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
+              '''
+            }
+            failure {
+              echo 'La migracion ha fallado.'
+              sh '''sed -i 's/"summary": "TITULOJSON"/"summary": "Migracion fallida"/g' integracion/jira.json'''
+              sh '''sed -i 's/"description": "Test exitoso"/"description": "Test fallido"/g' integracion/jira.json'''
+              sh '''
+              curl -H "Content-Type: multipart/form-data" -X POST -F info=@integracion/jira.json -F results=@integracion/prueba-failed.json -H "Authorization: Bearer $TOKEN" https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
+              '''
+            }
+          }
+        }
+        stage('Deploy Prod') {
+          steps {
+            cleanWs()
+            git branch: 'master', url: 'https://github.com/dbustamanter/prueba.dibrsite.com.git'
+            sh 'cp -r $WORKSPACE/* /var/www/html/prod'
+          }
+        post {
+            success {
+              echo 'El despliegue al ambiente PROD ha sido exitoso'
+              sh '''sed -i 's/"summary": "TITULOJSON"/"summary": "Despliegue PROD exitoso"/g' integracion/jira.json'''
+              sh """sed -i 's/"description": "Test exitoso"/"description": "Ejecucion Jenkins:  ${env.BUILD_TAG}  [~accountid:63d93e141b13d42998e0e160] "/g' integracion/jira.json"""
+              sh '''
+              curl -H "Content-Type: multipart/form-data" -X POST -F info=@integracion/jira.json -F results=@integracion/prueba-passed.json -H "Authorization: Bearer $TOKEN" https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
+              '''
+            }
+            failure {
+              echo 'El despliegue al ambiente PROD ha fallado'
+              sh '''sed -i 's/"summary": "TITULOJSON"/"summary": "Despliegue PROD fallido"/g' integracion/jira.json'''
+              sh '''sed -i 's/"description": "Test exitoso"/"description": "Despliegue PROD fallido"/g' integracion/jira.json'''
+              sh '''
+              curl -H "Content-Type: multipart/form-data" -X POST -F info=@integracion/jira.json -F results=@integracion/prueba-failed.json -H "Authorization: Bearer $TOKEN" https://xray.cloud.getxray.app/api/v2/import/execution/cucumber/multipart
+              '''
         }
       }
     }
