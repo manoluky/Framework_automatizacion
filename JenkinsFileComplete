@@ -21,7 +21,7 @@ pipeline {
             git branch: 'develop', url: 'https://github.com/dbustamanter/prueba.dibrsite.com.git'
             script {
               env.TOKEN = sh(
-                script: 'curl -H "Content-Type: application/json" -X POST --data @"integracion/cloud_auth.json" https://xray.cloud.getxray.app/api/v2/authenticate | tr -d "\\""',
+                script: 'curl -H "Content-Type: application/json" -X POST --data @"cloud_auth.json" https://xray.cloud.getxray.app/api/v2/authenticate | tr -d "\\""',
                 returnStdout: true
               ).trim()
               sh 'export TOKEN=$TOKEN'
