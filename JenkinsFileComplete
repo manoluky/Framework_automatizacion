@@ -11,11 +11,11 @@ pipeline {
         TIPO = 0
     }
     stages {
-        #stage('CleanWorkspace') {
-        #    steps {
-        #        cleanWs()
-        #    }
-        #}
+        /*stage('CleanWorkspace') {
+            steps {
+                cleanWs()
+            }
+        }*/
         stage('gitClone') {
           steps {
             git branch: 'develop', url: 'https://github.com/dbustamanter/prueba.dibrsite.com.git'
