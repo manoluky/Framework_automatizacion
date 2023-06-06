@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         gradle "gr8.0.1"
-        nodejs "node"
+        nodejs "node-14"
     }
     environment {
         TESTPLAN = "IXR-94"
