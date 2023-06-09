@@ -25,7 +25,7 @@ export TESTEXECUTION=$(grep "PX-" log.txt | cut -d '"' -f 8)
 echo "ID de TestPlan: ${TESTPLAN}"
 echo "ID de ejecucion: ${TESTEXECUTION}"
 echo "Attachment para ejecucion"
-export url=https://capacitacionxray9.atlassian.net/rest/api/3/issue/${TESTEXECUTION}/attachments
+export url=https://instancia3.atlassian.net/rest/api/3/issue/${TESTEXECUTION}/attachments
 echo "VERIFICANDO URL"
 echo $url
 cd results/
