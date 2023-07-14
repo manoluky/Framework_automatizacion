@@ -1,7 +1,7 @@
 name: example
 replicas: 2
 
-image: docker:latest
+image: imagendocker
 # dockercfg: <+artifact.imagePullSecret>
 
 createNamespace: true
