@@ -9,7 +9,7 @@ RAMA: "master"
 TAG: "@TEST_PX-3"
 TIPO: 0
 build: 
-image: docker:latest
+image: imagendocker
 services:
 - docker:dind
 stage: build
