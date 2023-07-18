@@ -1,11 +1,11 @@
 name: example
 replicas: 2
 
-image: imagendocker
+image: imagendocker2
 # dockercfg: <+artifact.imagePullSecret>
 
 createNamespace: true
-namespace: harness-delegate-ng
+namespace: proyecto1
 
 # Service Type allow you to specify what kind of service you want.
 # Possible values for ServiceType are:
