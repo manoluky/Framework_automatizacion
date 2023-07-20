@@ -1,0 +1,48 @@
+pipeline:
+  name: testdocker
+  identifier: testdocker
+  projectIdentifier: manu
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: testdocker
+        identifier: testdocker
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: harnessdocker
+          environment:
+            environmentRef: dev_1689715706022
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: devcluster_1689715706022
+          execution:
+            steps:
+              - step:
+                  name: Rollout Deployment
+                  identifier: rolloutDeployment
+                  type: K8sRollingDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
+            rollbackSteps:
+              - step:
+                  name: Rollback Rollout Deployment
+                  identifier: rollbackRolloutDeployment
+                  type: K8sRollingRollback
+                  timeout: 10m
+                  spec:
+                    pruningEnabled: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+        delegateSelectors:
+          - dockerharness
