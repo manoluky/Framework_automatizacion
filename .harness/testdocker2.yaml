@@ -35,4 +35,4 @@ pipeline:
                     tags:
                       - latest
         delegateSelectors:
-          - dockertest
+          - dockerharness
