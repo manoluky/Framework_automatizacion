@@ -34,3 +34,5 @@ pipeline:
                     repo: aaronbarra/dockertc_test-gradle-lab
                     tags:
                       - latest
+        delegateSelectors:
+          - dockertest
