@@ -21,7 +21,7 @@ pipeline:
             os: Linux
             arch: Amd64
           runtime:
-            type: Cloud
+            type: Docker
             spec: {}
           execution:
             steps:
@@ -34,6 +34,8 @@ pipeline:
                     repo: aaronbarra/dockertc_test-gradle-lab
                     tags:
                       - latest
+          sharedPaths:
+            - ""
         delegateSelectors:
           - dockerharness
         when:
