@@ -29,6 +29,8 @@ pipeline:
                   spec:
                     skipDryRun: false
                     pruningEnabled: false
+                    delegateSelectors:
+                      - dockerharness
             rollbackSteps:
               - step:
                   name: Rollback Rollout Deployment
