@@ -30,7 +30,7 @@ pipeline:
                   name: BuildAndPushDockerRegistry_1
                   identifier: BuildAndPushDockerRegistry_1
                   spec:
-                    connectorRef: dockerharness
+                    connectorRef: account.harnessImage
                     repo: aaronbarra/dockertc_test-gradle-lab
                     tags:
                       - latest
