@@ -1,0 +1,48 @@
+pipeline:
+  name: testdocker
+  identifier: testdocker
+  projectIdentifier: kubedockerqlo
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: testdocker
+        identifier: testdocker
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: testdocker
+          environment:
+            environmentRef: dev_1689896981389
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: devcluster_1689896981389
+          execution:
+            steps:
+              - step:
+                  name: Rollout Deployment
+                  identifier: rolloutDeployment
+                  type: K8sRollingDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
+            rollbackSteps:
+              - step:
+                  name: Rollback Rollout Deployment
+                  identifier: rollbackRolloutDeployment
+                  type: K8sRollingRollback
+                  timeout: 10m
+                  spec:
+                    pruningEnabled: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+        delegateSelectors:
+          - helm-delegate
